@@ -31,3 +31,9 @@ move.sh
 
 # Test-vault
 docs/test-vault/.obsidian/workspace
+docs/test-vault/.obsidian/*
+docs/test-vault/.trash/*
+
+# Generated files
+coverage/
+data.json
