@@ -14,7 +14,7 @@ export default class ObsidianFlashcard extends Plugin {
 
 		// TODO test when file did not insert flashcards, but one of them is in Anki already
 		const anki = new Anki()
-		this.settings = await this.loadData() || this.getDefaultSettings()
+		this.settings = {...this.getDefaultSettings(), ... await this.loadData()};
 		this.cardsService = new CardsService(this.app, this.settings)
 
 		const statusBar = this.addStatusBarItem()
@@ -55,7 +55,19 @@ export default class ObsidianFlashcard extends Plugin {
 	}
 
 	private getDefaultSettings(): ISettings {
-		return { contextAwareMode: true, sourceSupport: false, codeHighlightSupport: false, inlineID: false, contextSeparator: " > ", deck: "Default", folderBasedDeck: true, flashcardsTag: "card", inlineSeparator: "::", inlineSeparatorReverse: ":::", defaultAnkiTag: "obsidian", ankiConnectPermission: false }
+		return { contextAwareMode: true,
+			sourceSupport: false,
+			codeHighlightSupport: false,
+			inlineID: false,
+			contextSeparator: " > ",
+			deck: "Default",
+			folderBasedDeck: true,
+			flashcardsTag: "card",
+			inlineSeparator: "::",
+			inlineSeparatorReverse: ":::",
+			defaultAnkiTag: "obsidian",
+			ankiConnectPermission: false
+		}
 	}
 
 	private generateCards(activeFile: TFile) {
